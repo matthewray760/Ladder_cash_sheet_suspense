@@ -3,7 +3,7 @@ from data_intake.load_data import load_mappings, load_cash_activity, load_tran_d
 from utils.to_excel import def_init_excel, bulk_wire_tool
 from bulk_helios_entry.cash_tran_checks import cash_tran_check
 from bulk_helios_entry.merge_bect import merge_cashtran_blkentry, merge_y_cashtran_blkentry
-from cash_wire import run_cash_wire
+from cash_wire.cash_wire import run_cash_wire
 from utils.sql import sql_cash_tran_check
 from utils.config import mapping_filename, tran_detail_filename, use_excel_for_mapping,use_sql_for_cash_tran_check
 from bulk_helios_entry.bulk_helios_entry import create_helios_entry

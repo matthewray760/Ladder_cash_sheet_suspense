@@ -1,6 +1,6 @@
 import pandas as pd
 from utils.sql import cash_wire_trn
-from susp_accounts import susp_accounts
+from utils.config import susp_accounts
 
 
 def run_cash_wire(final_merge_y,entry_date):
