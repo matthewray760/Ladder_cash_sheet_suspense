@@ -23,7 +23,7 @@ def cash_wire_trn(entry_date):
         # Create a cursor object to execute the SQL statements
         cursor = conn.cursor()
 
-        cursor.execute('SET QUERY_GOVERNOR_COST_LIMIT 300')
+        cursor.execute('SET QUERY_GOVERNOR_COST_LIMIT 1000')
 
         # Execute a SQL query
         query = f'''
@@ -32,7 +32,7 @@ def cash_wire_trn(entry_date):
         WHERE 1=1
             and AccountID IN (551387,551380,551386,551375,551384,551382,551397,551370,551401,551376,551394,551398,551399,551383,551395,551385,551389,551377,551378,551404,551400,551371,551381,551392,551372,551379,551388,551402,551391,551396,551393,551390,551374,551403,551373)
             --and origTransactionid IN (1420072797)
-            and t.EntryDate > '{entry_date}'
+            and t.EntryDate >= '{entry_date}'
             and transactiontypeabbreviation = 'TRN'
             and isactive = 1
             and username = 'matthewray'
@@ -76,7 +76,7 @@ def sql_cash_tran_check(entry_date):
         # Create a cursor object to execute the SQL statements
         cursor = conn.cursor()
 
-        cursor.execute('SET QUERY_GOVERNOR_COST_LIMIT 300')
+        cursor.execute('SET QUERY_GOVERNOR_COST_LIMIT 1000')
 
         # Execute a SQL query
         query = f'''
@@ -85,7 +85,7 @@ def sql_cash_tran_check(entry_date):
         WHERE 1=1
             and AccountID IN (select accountID FROM Aggregates where aggregateID = 369118)
             --and origTransactionid IN (1420072797)
-            and t.EntryDate > '{entry_date}'
+            and t.EntryDate >= '{entry_date}'
             and transactiontypeabbreviation = 'TRN'
             and isactive = 1
             --and username = 'matthewray'

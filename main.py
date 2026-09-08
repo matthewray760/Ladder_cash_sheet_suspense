@@ -10,8 +10,8 @@ from bulk_helios_entry.bulk_helios_entry import create_helios_entry
 
 
 ### Parameters for initial run
-cashsheet_filename = '1.2026_final'
-entry_date = '2026-01-01'
+cashsheet_filename = '8.2026_final'
+entry_date = '2026-08-01'
 
 to_excel = True
 
@@ -35,9 +35,9 @@ def run_pipeline():
 
     ### Create list of mappings to short description
     modifications = mappings['Short Description'].tolist()
-    filtered_cashsheet = cashsheet[cashsheet['Short Description'].str.contains('|'.join(modifications))]
+    filtered_cashsheet = cashsheet[cashsheet['Short Description'].str.contains('|'.join(modifications), na=False)]
     merged_df = pd.merge(filtered_cashsheet,mappings, on='key_pair')
-    merged_df['Date'] = merged_df['Date'].dt.date
+    merged_df['Date'] = merged_df['Transaction date'].dt.date
 
 
     ### Run Bulk Helios Entries

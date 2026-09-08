@@ -5,7 +5,7 @@ filename = 'GL_Mappings'
 
 def load_mappings(mapping_filename):
     # Load the Excel file
-    excel_file = pd.ExcelFile(fr'C:\Users\matthewray\OneDrive - Clearwater\Desktop\Ladder\Python\GL_Entries\inputs\Mappings\{mapping_filename}.xlsx')
+    excel_file = pd.ExcelFile(fr'C:\Users\matthewray\OneDrive - Clearwater\Desktop\Ladder\Python\Checks\Suspense_Entries\inputs\Mappings\{mapping_filename}.xlsx')
     
     # Get all sheet names
     all_sheets = excel_file.sheet_names
@@ -40,7 +40,7 @@ def load_cash_activity(cashsheet_filename):
 
     for sheet in xls.sheet_names:
         if 'Cash Activity' in sheet:
-            df = pd.read_excel(xls, sheet_name=sheet, skiprows=3)
+            df = pd.read_excel(xls, sheet_name=sheet, skiprows=4)
             df['Source_Sheet'] = sheet
 
             dataframes.append(df)
@@ -51,11 +51,15 @@ def load_cash_activity(cashsheet_filename):
     combined_df.dropna(subset=['Short Description'], inplace=True)
     combined_df = combined_df[combined_df['Source_Sheet'] != 'Cash Activity MM-DD']
 
+    combined_df.rename(columns = {'Company': 'Entity'}, inplace= True)
+    combined_df.rename(columns = {'Account number': 'Account_number'}, inplace= True)
+
     combined_df['key_pair'] = combined_df.apply(lambda row: f"{row['Entity']}_{row['Short Description']}", axis=1)
 
-    combined_df.rename(columns = {'Acct #': 'Acct_#'}, inplace= True)
 
-    combined_df = combined_df[combined_df['Acct_#'] != 8147891123]
+
+
+    combined_df = combined_df[combined_df['Account_number'] != 8147891123]
 
     return combined_df
 

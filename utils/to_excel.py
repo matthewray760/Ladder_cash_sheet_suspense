@@ -12,7 +12,7 @@ def def_init_excel(cashsheet_filename,tran_check,final_merge_yn,final_merge_y_w_
 
     month = date_obj.strftime('%m.%Y')
 
-    output_dir = fr'C:\Users\matthewray\OneDrive - Clearwater\Desktop\Ladder\Python\GL_Entries\outputs\{month}'
+    output_dir = fr'C:\Users\matthewray\OneDrive - Clearwater\Desktop\Ladder\Python\Checks\Suspense_Entries\outputs\{month}'
 
     # Create the directory if it doesn't exist
     if not os.path.exists(output_dir):
@@ -43,7 +43,7 @@ def def_init_excel(cashsheet_filename,tran_check,final_merge_yn,final_merge_y_w_
                 adjusted_width = (max_length + 6)
                 worksheet.column_dimensions[column].width = adjusted_width
     print("Python: Executed successfully. Output file created")
-    writer.save()
+    writer.close()
 
 
 def bulk_wire_tool(bulk_df,entry_date,merged,filename):
@@ -52,7 +52,7 @@ def bulk_wire_tool(bulk_df,entry_date,merged,filename):
 
     month = date_obj.strftime('%m.%Y')
 
-    pathway = fr'C:\Users\matthewray\OneDrive - Clearwater\Desktop\Ladder\Python\GL_Entries\outputs\{month}\transaction_ids_{filename}.xlsx'
+    pathway = fr'C:\Users\matthewray\OneDrive - Clearwater\Desktop\Ladder\Python\Checks\Suspense_Entries\outputs\{month}\transaction_ids_{filename}.xlsx'
 
     writer = pd.ExcelWriter(pathway,engine= 'openpyxl', mode='w')
 
@@ -75,5 +75,5 @@ def bulk_wire_tool(bulk_df,entry_date,merged,filename):
                 adjusted_width = (max_length + 6)
                 worksheet.column_dimensions[column].width = adjusted_width
     print("Python: Executed successfully. Output file created")
-    writer.save()
+    writer.close()
 
